@@ -10,24 +10,15 @@ server = os.getenv("SQL_SERVER")
 database = os.getenv("SQL_DATABASE")
 username = os.getenv("SQL_USERNAME")
 password = os.getenv("SQL_PASSWORD")
-trusted_connection = os.getenv("SQL_TRUSTED_CONNECTION", "no").lower() == "yes"
+trusted_connection = os.getenv("SQL_TRUSTED_CONNECTION")
 
 # se arma la cadena de conexión
-if trusted_connection:
-    conn_str = (
+conn_str = (
         f"DRIVER={{ODBC Driver 17 for SQL Server}};"
         f"SERVER={server};"
         f"DATABASE={database};"
         f"Trusted_Connection=yes;"
-    )
-else:
-    conn_str = (
-        f"DRIVER={{ODBC Driver 17 for SQL Server}};"
-        f"SERVER={server};"
-        f"DATABASE={database};"
-        f"UID={username};"
-        f"PWD={password};"
-    )
+)
 
 # Conectar y consultar
 try:
