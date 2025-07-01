@@ -21,14 +21,12 @@ conn_str = (
 )
 
 # Conectar y consultar
-try:
-    def obtenerConexion():
-        conexion = pyodbc.connect(conn_str)
-        conexion.close()
+def obtenerConexion():
+    try:
+        return pyodbc.connect(conn_str)
+    except Exception as e:
+        print("Error al conectar: ", e)
         
-except Exception as e:
-    print("Error al conectar: ", e)
-    
 def consulta(query, params=None, fetch=True):
     conexion = obtenerConexion()
     if conexion == None:
