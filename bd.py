@@ -39,7 +39,7 @@ def consulta(query, params=None, fetch=True):
         else:
             cursor.execute(query)
 
-        resultados = cursor.fetchall() if fetch else None #fetch es si querés que la función devuelva los resultados de la consulta o no.
+        resultados = cursor.fetchall() if fetch else True #fetch es si querés que la función devuelva los resultados de la consulta o no.
 
         cursor.close()
         conexion.commit()  # Para operaciones insert, update, delete

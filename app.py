@@ -1,14 +1,20 @@
 from bd import consulta
 
-def ver_empleados():
-    query = "SELECT * FROM empleados"
-    resultados = consulta(query)
+def registrarEmpleado(nombre,apellido,correo,clave):
+    
+    empleadoRepetido = "SELECT * FROM empleados WHERE correo = ?"
+    resultadoEmpleadoRepetido = consulta(empleadoRepetido, (correo,), fetch=True)
+    
+    if resultadoEmpleadoRepetido:
+        print("Usuario repetido")
+        return
+        
+    query = "INSERT INTO empleados(nombre,apellido,correo,clave) VALUES (?,?,?,?)"
+    resultados = consulta(query,(nombre,apellido,correo,clave),fetch=False)
     
     if resultados:
-        for fila in resultados:
-            print(fila)
-    else:
-        print("No se encontraron resultados.")
+        print("Empleado registrado:")
             
-ver_empleados()
+registrarEmpleado("nachito","rosales","nachitos@gmail.com","123")
+
 
