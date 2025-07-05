@@ -21,31 +21,31 @@ conn_str = (
 )
 
 # Conectar y consultar
-def obtenerConexion():
+def getConnection():
     try:
         return pyodbc.connect(conn_str)
     except Exception as e:
         print("Error al conectar: ", e)
         
-def consulta(query, params=None, fetch=True):
-    conexion = obtenerConexion()
-    if conexion == None:
+def queryFunction(query, params=None, fetch=True):
+    connection = getConnection()
+    if connection == None:
         print("No se conectó a la base de datos.")
         return
     try:
-        cursor = conexion.cursor()
+        cursor = connection.cursor()
         if params:
             cursor.execute(query, params)
         else:
             cursor.execute(query)
 
-        resultados = cursor.fetchall() if fetch else True #fetch es si querés que la función devuelva los resultados de la consulta o no.
+        results = cursor.fetchall() if fetch else True #fetch es si querés que la función devuelva los resultados de la consulta o no.
 
         cursor.close()
-        conexion.commit()  # Para operaciones insert, update, delete
-        conexion.close()
+        connection.commit()  # Para operaciones insert, update, delete
+        connection.close()
 
-        return resultados
+        return results
 
     except Exception as e:
         print("Error al ejecutar la consulta:", e)
