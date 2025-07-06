@@ -1,4 +1,5 @@
 from bd import queryFunction
+from tkinter import messagebox
 
 class Employee:
     def __init__(self,nombre,apellido,correo,clave):
@@ -12,7 +13,7 @@ class Employee:
         resultRepeatEmployee = queryFunction(repeatEmployee (self.correo,), fetch=True)
     
         if resultRepeatEmployee:
-            print("Usuario repetido")
+            messagebox.showwarning("Ya existe un empleado con este e-mail, vuelva a intentarlo.")
             return
 
     def register(self):
@@ -20,6 +21,6 @@ class Employee:
         resultados = queryFunction(query,(self.nombre,self.apellido,self.correo,self.clave),fetch=False)
     
         if resultados:
-            print("Empleado registrado:")
+            messagebox.showinfo("Empleado registrado correctamente.")
 
             
