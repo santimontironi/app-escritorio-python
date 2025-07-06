@@ -7,16 +7,16 @@ class Employee:
         self.apellido = apellido
         self.correo = correo
         self.clave = clave
+
+    def register(self):
         
-    def checkEmployee(self):
         repeatEmployee = "SELECT * FROM empleados WHERE correo = ?"
-        resultRepeatEmployee = queryFunction(repeatEmployee (self.correo,), fetch=True)
+        resultRepeatEmployee = queryFunction(repeatEmployee, (self.correo,), fetch=True)
     
         if resultRepeatEmployee:
             messagebox.showwarning("Ya existe un empleado con este e-mail, vuelva a intentarlo.")
             return
-
-    def register(self):
+        
         query = "INSERT INTO empleados(nombre,apellido,correo,clave) VALUES (?,?,?,?)"
         resultados = queryFunction(query,(self.nombre,self.apellido,self.correo,self.clave),fetch=False)
     

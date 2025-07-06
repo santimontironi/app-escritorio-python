@@ -1,4 +1,5 @@
 import tkinter as tk
+from controllers.empleado import Employee
 
 window = tk.Tk()
 
@@ -12,6 +13,17 @@ titulo.pack(pady=(15))
 contenedor = tk.Frame(window,relief="raised",bd=4)
 contenedor.pack(expand=True)  # se centra vertical y horizontalmente
 
+
+def sendData():
+    nombre = entry_nombre.get()
+    apellido = entry_apellido.get()
+    correo = entry_correo.get()
+    clave = entry_clave.get()
+    
+    newEmployee = Employee(nombre,apellido,correo,clave)
+    
+    newEmployee.register()
+    
 
 tk.Label(contenedor, text="Nombre:").grid(row=0, column=0, padx=10, pady=10)
 entry_nombre = tk.Entry(contenedor)
@@ -30,7 +42,7 @@ entry_clave = tk.Entry(contenedor, show="*")
 entry_clave.grid(row=3, column=1, padx=10, pady=10)
 
 
-button = tk.Button(contenedor, text="Registrarse", bg="lightgreen").grid(row=4, column=0, columnspan=2, padx=20, pady=20)
+button = tk.Button(contenedor, text="Registrarse", bg="lightgreen", command=sendData).grid(row=4, column=0, columnspan=2, padx=20, pady=20)
 
 
 window.mainloop()
