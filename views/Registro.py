@@ -6,11 +6,12 @@ window.title("Registrarse")
 window.configure(bg="lightblue")
 window.geometry("650x400")
 
+titulo = tk.Label(window, text="Registro", font=("Times New Roman", 35, "bold"), bg="lightblue")
+titulo.pack(pady=(15))
+
 contenedor = tk.Frame(window,relief="raised",bd=4)
 contenedor.pack(expand=True)  # se centra vertical y horizontalmente
 
-titulo = tk.Label(window, text="Registrarse", font=("Times New Roman", 18, "bold"), bg="lightblue")
-titulo.pack(pady=(20,10),anchor="n")
 
 tk.Label(contenedor, text="Nombre:").grid(row=0, column=0, padx=10, pady=10)
 entry_nombre = tk.Entry(contenedor)
@@ -29,7 +30,7 @@ entry_clave = tk.Entry(contenedor, show="*")
 entry_clave.grid(row=3, column=1, padx=10, pady=10)
 
 
-button = tk.Button(contenedor, text="Registrar").grid(row=4, column=0, columnspan=2, pady=30)
+button = tk.Button(contenedor, text="Registrarse", bg="lightgreen").grid(row=4, column=0, columnspan=2, padx=20, pady=20)
 
 
 window.mainloop()
