@@ -1,6 +1,6 @@
 import tkinter as tk
 from controllers.employee import Employee
-from views import Panel
+from views.Dashboard import dashboard_window
 
 def register_window():
 
@@ -42,7 +42,7 @@ def register_window():
         
         if newEmployee.register():
             window.destroy()
-            Panel()
+            dashboard_window()
 
 
     tk.Button(contenedor, text="Registrarse", bg="lightgreen", command=sendData).grid(row=4, column=0, columnspan=2, padx=20, pady=20)

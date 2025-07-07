@@ -1,6 +1,6 @@
 import tkinter as tk
 
-def Panel():
+def dashboard_window():
 
     window = tk.Tk()
 
