@@ -18,10 +18,20 @@ class Employee:
             return False
         
         query = "INSERT INTO empleados(nombre,apellido,correo,clave) VALUES (?,?,?,?)"
-        resultados = queryFunction(query,(self.nombre,self.apellido,self.correo,self.clave),fetch=False)
+        results = queryFunction(query,(self.nombre,self.apellido,self.correo,self.clave),fetch=False)
     
-        if resultados:
+        if results:
             messagebox.showinfo("Éxito","Empleado registrado correctamente.")
             return True
 
             
+    def login(correo,clave):
+        loginQuery = "SELECT * FROM empleados WHERE correo = ? and clave = ?"
+        resultsLogin = queryFunction(loginQuery, (correo, clave), fetch=True)
+        
+        if resultsLogin:
+            messagebox.showinfo("Login exitoso","Ha iniciado sesión correctamente")
+            return True
+        else:
+            messagebox.showwarning("Error", "Credenciales incorrectas, vuelva a intentarlo.")
+            return False
