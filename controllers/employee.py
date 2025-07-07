@@ -14,13 +14,14 @@ class Employee:
         resultRepeatEmployee = queryFunction(repeatEmployee, (self.correo,), fetch=True)
     
         if resultRepeatEmployee:
-            messagebox.showwarning("Ya existe un empleado con este e-mail, vuelva a intentarlo.")
-            return
+            messagebox.showwarning("Error", "Ya existe un empleado con este e-mail, vuelva a intentarlo.")
+            return False
         
         query = "INSERT INTO empleados(nombre,apellido,correo,clave) VALUES (?,?,?,?)"
         resultados = queryFunction(query,(self.nombre,self.apellido,self.correo,self.clave),fetch=False)
     
         if resultados:
-            messagebox.showinfo("Empleado registrado correctamente.")
+            messagebox.showinfo("Éxito","Empleado registrado correctamente.")
+            return True
 
             

@@ -1,7 +1,4 @@
-from views import Registro
+from views.Register import register_window
 
 if __name__ == "__main__":
-    app = Registro()
-    app.mainloop()
-
-
+    register_window()
