@@ -8,7 +8,7 @@ def login_window():
 
     window.title("Ingreso")
     window.configure(bg="purple")
-    window.geometry("650x400")
+    window.geometry("700x400")
     
     
     title = tk.Label(window, text="Ingreso", font=("Times New Roman", 35, "bold", "underline"), bg="lightblue")
