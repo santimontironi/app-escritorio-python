@@ -1,5 +1,7 @@
 import tkinter as tk
 from views.AddClient import addClient_window
+from controllers.client import Client
+from tkinter import ttk
 
 def dashboard_window():
 
@@ -12,8 +14,28 @@ def dashboard_window():
     title = tk.Label(window, text="Panel", font=("Times New Roman", 35, "bold", "underline"), bg="lightblue")
     title.pack(pady=(15))
     
-    container = tk.Frame(window,relief="raised",bd=4)
-    container.pack(expand=True)
+    container = tk.Frame(window, relief="raised", bd=4, width=700)
+    container.pack()
+    
+    tree = ttk.Treeview(container, columns=("ID", "Nombre", "Apellido", "Teléfono", "Día", "Hora"), show="headings")
+    tree.heading("ID", text="ID")
+    tree.heading("Nombre", text="Nombre")
+    tree.heading("Apellido", text="Apellido")
+    tree.heading("Teléfono", text="Teléfono")
+    tree.heading("Día", text="Día")
+    tree.heading("Hora", text="Hora")
+
+    tree.pack(fill="both", expand=True)
+
+    def load_clients():
+        client = Client(None, None, None, None, None)
+        clients = client.selectAll()
+
+        if clients:
+            for row in clients:
+                tree.insert("", tk.END, values=row)
+
+    load_clients()
     
     def toAddClient(event=None):
         window.destroy()

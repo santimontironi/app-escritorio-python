@@ -25,3 +25,8 @@ class Client():
         if results:
             messagebox.showinfo("Éxito","Cliente agregado correctamente.")
             return True
+        
+    def selectAll(self):
+        clientsQuery = "SELECT * FROM clientes"
+        return queryFunction(clientsQuery,fetch=True)
+ 
