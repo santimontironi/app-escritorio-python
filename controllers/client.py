@@ -2,7 +2,7 @@ from bd import queryFunction
 from tkinter import messagebox
 
 class Client():
-    def __init__(self,nombre,apellido,telefono,dia,hora,activo):
+    def __init__(self,nombre,apellido,telefono,dia,hora,activo = True):
         self.nombre = nombre
         self.apellido = apellido
         self.telefono = telefono
@@ -19,7 +19,7 @@ class Client():
             messagebox.showwarning("Error", "Este empledo ya está activo en el sistema.")
             return False
         
-        query = "INSERT INTO clientes(nombre,apellido,telefono,dia,fecha) VALUES (?,?,?,?,?)"
+        query = "INSERT INTO clientes(nombre,apellido,telefono,dia,hora) VALUES (?,?,?,?,?)"
         results = queryFunction(query,(self.nombre,self.apellido,self.telefono,self.dia,self.hora),fetch=False)
     
         if results:
