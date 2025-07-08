@@ -4,6 +4,8 @@ from controllers.client import Client
 from tkinter import ttk
 
 def dashboard_window():
+    
+    from views.Login import login_window
 
     window = tk.Tk()
 
@@ -58,8 +60,17 @@ def dashboard_window():
         addClient_window()
     
     btnToAddClient = tk.Label(window, text="Agregar nuevo cliente", fg="blue", cursor="hand2", font=("Helvetica", 10, "underline"))
-    btnToAddClient.pack()
+    btnToAddClient.pack(pady=10)
 
     btnToAddClient.bind("<Button-1>", toAddClient)
+    
+    def logout(event=None):
+        window.destroy()
+        login_window()
+    
+    btnLogout = tk.Label(window, text="Cerrar sesión", fg="red", cursor="hand2", font=("Helvetica", 10, "underline"))
+    btnLogout.pack(anchor="ne", padx=10, pady=10)
+
+    btnLogout.bind("<Button-1>", logout)
     
     window.mainloop()
