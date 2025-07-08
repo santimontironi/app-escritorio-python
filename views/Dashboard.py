@@ -25,7 +25,14 @@ def dashboard_window():
     tree.heading("Día", text="Día")
     tree.heading("Hora", text="Hora")
 
-    tree.pack(fill="both", expand=True)
+    tree.column("ID", width=40, anchor="center", stretch=False)
+    tree.column("Nombre", width=120, anchor="center", stretch=False)
+    tree.column("Apellido", width=120, anchor="center", stretch=False)
+    tree.column("Teléfono", width=130, anchor="center", stretch=False)
+    tree.column("Día", width=100, anchor="center", stretch=False)
+    tree.column("Hora", width=100, anchor="center", stretch=False)
+
+    tree.pack()
 
     def load_clients():
         client = Client(None, None, None, None, None)
@@ -33,7 +40,16 @@ def dashboard_window():
 
         if clients:
             for row in clients:
-                tree.insert("", tk.END, values=row)
+                id, nombre, apellido, telefono, dia, hora = row
+                
+                # formatear 'dia' si es datetime.date
+                if hasattr(dia, 'strftime'):
+                    dia = dia.strftime("%Y-%m-%d")
+                
+                # Convertir 'hora' a string por si acaso
+                hora = str(hora)
+                
+                tree.insert("", tk.END, values=(id, nombre, apellido, telefono, dia, hora))
 
     load_clients()
     

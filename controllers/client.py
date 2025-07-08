@@ -27,6 +27,6 @@ class Client():
             return True
         
     def selectAll(self):
-        clientsQuery = "SELECT * FROM clientes"
+        clientsQuery = "SELECT id,nombre,apellido,telefono,dia,hora FROM clientes"
         return queryFunction(clientsQuery,fetch=True)
  
