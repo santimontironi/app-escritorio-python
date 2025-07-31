@@ -39,4 +39,33 @@ class Client():
         else:
             messagebox.showerror("Error", "No se pudo eliminar el cliente.")
             return False
+        
+    def update(self, client_id):
+        query = """
+        UPDATE clientes 
+        SET nombre = ?, apellido = ?, telefono = ?, dia = ?, hora = ?
+        WHERE id = ?
+        """
+        result = queryFunction(query, (self.nombre, self.apellido, self.telefono, self.dia, self.hora, client_id), fetch=False)
+        
+        if result is not None:
+            messagebox.showinfo("Éxito", "Cliente actualizado correctamente.")
+            return True
+        else:
+            messagebox.showerror("Error", "No se pudo actualizar el cliente.")
+            return False
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
  
