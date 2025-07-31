@@ -2,24 +2,15 @@ import tkinter as tk
 from controllers.employee import Employee
 from views.Dashboard import dashboard_window
 from views.Login import login_window
-from PIL import Image, ImageTk 
 
 def register_window():
 
     window = tk.Tk()
     
     window.title("Registrarse")
-    window.geometry("700x400")
+    window.geometry("750x450")
     
-    # sec carga y se dimensiona la imagen
-    bg_image = Image.open("assets/img/fondoRegistro.jpeg")
-    bg_image = bg_image.resize((700, 400))
-    bg_photo = ImageTk.PhotoImage(bg_image)
-
-    # se coloca la imagen de fondo
-    bg_label = tk.Label(window, image=bg_photo)
-    bg_label.image = bg_photo  
-    bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+    window.configure(bg='lightblue')
 
     title = tk.Label(window, text="Registro", font=("Times New Roman", 35, "bold", "underline"), bg="lightblue")
     title.pack(pady=(15))
