@@ -29,4 +29,14 @@ class Client():
     def selectAll(self):
         clientsQuery = "SELECT id,nombre,apellido,telefono,dia,hora FROM clientes"
         return queryFunction(clientsQuery,fetch=True)
+
+    def delete(self, client_id):
+        query = "DELETE FROM clientes WHERE id = ?"
+        result = queryFunction(query, (client_id,), fetch=False)
+        if result is not None:
+            messagebox.showinfo("Éxito", "Cliente eliminado correctamente.")
+            return True
+        else:
+            messagebox.showerror("Error", "No se pudo eliminar el cliente.")
+            return False
  
