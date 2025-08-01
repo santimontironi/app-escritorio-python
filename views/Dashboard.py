@@ -88,9 +88,9 @@ def dashboard_window():
             messagebox.showwarning("Atención", "Seleccioná un cliente para editar.")
             return
 
-        item_id = selected_item[0]
-        values = tree.item(item_id)["values"]
-        client_id = values[0]
+        item_id = selected_item[0] # este es el ID interno del Treeview para la fila
+        values = tree.item(item_id)["values"] # valores de cada columna
+        client_id = values[0] # se selecciona la primera columna, que es el ID del cliente en la DB
 
         # Pedir datos uno por uno, precargados con el valor actual
         nombre = simpledialog.askstring("Editar Nombre", "Nombre:", initialvalue=values[1])

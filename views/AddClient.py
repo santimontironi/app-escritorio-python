@@ -10,7 +10,7 @@ def addClient_window():
 
     window.title("Agregar cliente")
     window.configure(bg="brown")
-    window.geometry("700x400")
+    window.geometry("700x450")
 
     title = tk.Label(window, text="Agregar cliente", font=("Times New Roman", 35, "bold", "underline"), bg="lightblue")
     title.pack(pady=10)
@@ -58,7 +58,7 @@ def addClient_window():
         window.destroy()
         dashboard_window()
     
-    goBack = tk.Label(window, text="Volver", fg="blue", cursor="hand2", font=("Helvetica", 10, "underline"))
+    goBack = tk.Label(window, text="Volver", fg="white", cursor="hand2", font=("Helvetica", 12, "underline"))
     goBack.configure(bg=window["bg"])
     goBack.pack(pady=12)
 
