@@ -3,6 +3,7 @@ from views.AddClient import addClient_window
 from controllers.client import Client
 from tkinter import ttk
 from tkinter import messagebox
+import tkinter.simpledialog as simpledialog
 
 def dashboard_window():
     
@@ -12,7 +13,7 @@ def dashboard_window():
 
     window.title("Panel")
     window.configure(bg="lightgreen")
-    window.geometry("700x400")
+    window.geometry("700x500")
     
     title = tk.Label(window, text="Panel", font=("Times New Roman", 35, "bold", "underline"), bg="lightblue")
     title.pack(pady=(15))
@@ -60,6 +61,10 @@ def dashboard_window():
         window.destroy()
         addClient_window()
         
+    def logout(event=None):
+        window.destroy()
+        login_window()
+        
     def delete_selected_client():
         selected_item = tree.selection()
         if not selected_item:
@@ -76,22 +81,48 @@ def dashboard_window():
 
             if success:
                 tree.delete(selected_item)
+                
+    def edit_selected_client_simple():
+        selected_item = tree.selection()
+        if not selected_item:
+            messagebox.showwarning("Atención", "Seleccioná un cliente para editar.")
+            return
+
+        item_id = selected_item[0]
+        values = tree.item(item_id)["values"]
+        client_id = values[0]
+
+        # Pedir datos uno por uno, precargados con el valor actual
+        nombre = simpledialog.askstring("Editar Nombre", "Nombre:", initialvalue=values[1])
+        if nombre is None: return
+        apellido = simpledialog.askstring("Editar Apellido", "Apellido:", initialvalue=values[2])
+        if apellido is None: return
+        telefono = simpledialog.askstring("Editar Teléfono", "Teléfono:", initialvalue=values[3])
+        if telefono is None: return
+        dia = simpledialog.askstring("Editar Día", "Día:", initialvalue=values[4])
+        if dia is None: return
+        hora = simpledialog.askstring("Editar Hora", "Hora:", initialvalue=values[5])
+        if hora is None: return
+
+        cliente = Client(nombre, apellido, telefono, dia, hora)
+        if cliente.update(client_id):
+            tree.item(item_id, values=(client_id, nombre, apellido, telefono, dia, hora))
     
+
     btnToAddClient = tk.Label(window, text="Agregar nuevo cliente", fg="blue", cursor="hand2", font=("Helvetica", 10, "underline"))
     btnToAddClient.pack(pady=10)
-
     btnToAddClient.bind("<Button-1>", toAddClient)
     
     btnDelete = tk.Button(window, text="Eliminar cliente seleccionado", bg="red", fg="white", command=lambda: delete_selected_client())
     btnDelete.pack(pady=5)
     
-    def logout(event=None):
-        window.destroy()
-        login_window()
+    btnEdit = tk.Button(window, text="Editar cliente seleccionado", bg="orange", fg="white", command=edit_selected_client_simple)
+    btnEdit.pack(pady=5)
     
     btnLogout = tk.Label(window, text="Cerrar sesión", fg="red", cursor="hand2", font=("Helvetica", 10, "underline"))
     btnLogout.pack(anchor="ne", padx=10, pady=10)
-
     btnLogout.bind("<Button-1>", logout)
+    
+    
     
     window.mainloop()
