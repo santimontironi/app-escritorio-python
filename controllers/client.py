@@ -12,6 +12,13 @@ class Client():
         
     def register(self):
         
+        checkClient = "SELECT * FROM clientes WHERE dia = ? AND hora = ? AND activo = ?"
+        result = queryFunction(checkClient, (self.dia, self.hora, True), fetch=True)
+        
+        if result:
+            messagebox.showwarning("Error", "Ya hay un cliente con ese día y hora activos.")
+            return False
+        
         repeatClient = "SELECT * FROM clientes WHERE telefono = ? and activo = ?"
         resultRepeatClient = queryFunction(repeatClient, (self.telefono, self.activo), fetch=True)
     
@@ -41,6 +48,17 @@ class Client():
             return False
         
     def update(self, client_id):
+        
+        check_query = """
+            SELECT * FROM clientes 
+            WHERE dia = ? AND hora = ? AND activo = ? AND id != ?
+        """
+        result = queryFunction(check_query, (self.dia, self.hora, True, client_id), fetch=True)
+
+        if result:
+            messagebox.showwarning("Error", "Ya existe un cliente con ese día y hora activos.")
+            return False
+
         query = """
         UPDATE clientes 
         SET nombre = ?, apellido = ?, telefono = ?, dia = ?, hora = ?
