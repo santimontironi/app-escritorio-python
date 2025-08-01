@@ -2,6 +2,7 @@ import tkinter as tk
 from views.AddClient import addClient_window
 from controllers.client import Client
 from tkinter import ttk
+from tkinter import messagebox
 
 def dashboard_window():
     
@@ -58,11 +59,31 @@ def dashboard_window():
     def toAddClient(event=None):
         window.destroy()
         addClient_window()
+        
+    def delete_selected_client():
+        selected_item = tree.selection()
+        if not selected_item:
+            messagebox.showwarning("Atención", "Por favor seleccioná un cliente.")
+            return
+        
+        confirm = messagebox.askyesno("Confirmar", "¿Estás seguro de que querés eliminar este cliente?")
+        if confirm:
+            item = tree.item(selected_item)
+            client_id = item["values"][0]
+
+            client = Client(None, None, None, None, None)
+            success = client.delete(client_id)
+
+            if success:
+                tree.delete(selected_item)
     
     btnToAddClient = tk.Label(window, text="Agregar nuevo cliente", fg="blue", cursor="hand2", font=("Helvetica", 10, "underline"))
     btnToAddClient.pack(pady=10)
 
     btnToAddClient.bind("<Button-1>", toAddClient)
+    
+    btnDelete = tk.Button(window, text="Eliminar cliente seleccionado", bg="red", fg="white", command=lambda: delete_selected_client())
+    btnDelete.pack(pady=5)
     
     def logout(event=None):
         window.destroy()
